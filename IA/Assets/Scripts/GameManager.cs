@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
         Vector2 scale = new Vector2( 1f / populationMultiplier, 1f / populationMultiplier);
 
+        int idx = 0;
+
         foreach ( List<Vector2> row in grid )
         {
             foreach ( Vector2 point in row)
@@ -36,12 +38,14 @@ public class GameManager : MonoBehaviour
                 if (Random.value < 0.2f)
                 {
                     GameObject g = Instantiate(part, transform);
+                    g.name = idx.ToString();
                     g.transform.localScale = scale;
                     if (populationMultiplier <= 1)
                     {
                         g.transform.localScale = new Vector2(0.5f, 0.5f);
                     }
                     g.transform.position = point;
+                    idx++;
                 }
             }
         }
