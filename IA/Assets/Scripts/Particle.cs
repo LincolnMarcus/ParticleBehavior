@@ -7,14 +7,8 @@ public class Particle : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    private void Start() {
+    private void Awake() {
         rb = GetComponent<Rigidbody2D>();
-
-        //Debug.Log( gameObject.name+" Closest : "+GetNeighborDistances( 3f ).Keys.ToList()[0].name );
-    }
-    void Update()
-    {
-        
     }
 
     public void Rotate( float degrees, float speed=1f ) {
@@ -48,20 +42,23 @@ public class Particle : MonoBehaviour
 
     public Dictionary<float, GameObject> GetNeighborDistances( float radius )
     {
+        Vector2 pos = transform.position;
         Dictionary<float , GameObject> result = new Dictionary<float , GameObject>();
 
-        List<Collider2D> neighbors = Physics2D.OverlapCircleAll( transform.position , radius ).ToList();
+        List<Collider2D> neighbors = Physics2D.OverlapCircleAll( pos, radius ).ToList();
         neighbors.Remove(GetComponent<Collider2D>());
-
+        int idx = 0;
         foreach ( var neighbor in neighbors ) {
-            float d = Vector2.Distance( transform.position , neighbor.transform.position );
+            float d = Vector2.Distance(pos, neighbor.transform.position );
             try {
                 result.Add( d , neighbor.gameObject );
             } catch {
                 result.Add( d+Random.value , neighbor.gameObject );
             }
-        }
+            if (idx > 10) { break; }
 
+            idx++;
+        }
 
         return result;
     }
