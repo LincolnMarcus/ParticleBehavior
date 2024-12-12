@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     List<List<Vector2>> grid = new List<List<Vector2>>();
 
+    List<Particle> particles = new List<Particle>();
+
     void Start()
     {
 
@@ -40,18 +42,19 @@ public class GameManager : MonoBehaviour
                     GameObject g = Instantiate(part, transform);
                     g.name = idx.ToString();
                     g.transform.localScale = scale;
+                    g.GetComponent<Particle>().awarenessRadii = 2f/populationMultiplier;
                     if (populationMultiplier <= 1)
                     {
                         g.transform.localScale = new Vector2(0.5f, 0.5f);
                     }
                     g.transform.position = point;
+                    particles.Add(g.GetComponent<Particle>());
                     idx++;
                 }
             }
         }
-    }
-    void Update()
-    {
-        
+        foreach( var g in particles ) {
+            g.GetComponent<Particle>().worldParticles = particles;
+        }
     }
 }

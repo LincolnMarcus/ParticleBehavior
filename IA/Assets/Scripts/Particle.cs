@@ -6,7 +6,9 @@ using UnityEngine;
 public class Particle : MonoBehaviour
 {
     Rigidbody2D rb;
+    public float awarenessRadii;
 
+    public List<Particle> worldParticles = new List<Particle>();
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
     }
@@ -40,6 +42,10 @@ public class Particle : MonoBehaviour
         rb.linearVelocity = transform.right * amt;
     }
 
+    public List<Particle> GetAllParticles() {
+        return worldParticles;
+    }
+
     public Dictionary<float, GameObject> GetNeighborDistances( float radius )
     {
         Vector2 pos = transform.position;
@@ -55,7 +61,7 @@ public class Particle : MonoBehaviour
             } catch {
                 result.Add( d+Random.value , neighbor.gameObject );
             }
-            if (idx > 10) { break; }
+            if (idx > 5) { break; }
 
             idx++;
         }

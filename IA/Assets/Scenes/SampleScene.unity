@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: {fileID: 7741045231761141592, guid: 268ac1ec418421a4591806f2c4026db4, type: 3}
-  populationMultiplier: 2
+  populationMultiplier: 4
 --- !u!4 &344823955
 Transform:
   m_ObjectHideFlags: 0

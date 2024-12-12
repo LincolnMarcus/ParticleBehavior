@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class AttractImposter : MonoBehaviour
 {
     Particle particle;
 
-    [SerializeField] float awarenessRadii = 3f;
+    public float awarenessRadii = 3f;
     [SerializeField] float avoidForce = 5f;
 
     GameObject[] enemies;
@@ -25,9 +26,8 @@ public class AttractImposter : MonoBehaviour
     }
     void Start() {
         if( gameObject.tag == "Enemy" ) {
-            gameObject.GetComponent<SpriteRenderer>().material.color = Color.red;
-            gameObject.GetComponent<TrailRenderer>().startColor = Color.red;
-            gameObject.GetComponent<TrailRenderer>().endColor = Color.red;
+            gameObject.GetComponent<SpriteRenderer>().material.color = Color.black;
+            gameObject.GetComponent<TrailRenderer>().enabled = false;
             awarenessRadii = 10f;
         }
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -45,21 +45,24 @@ public class AttractImposter : MonoBehaviour
 
         Vector2 toCenter = Vector2.zero;
         int idx = 0;
-        if( neighbors != null ) {
+        bool amEnemy = ( gameObject.tag == "Enemy" );
+        if( neighbors.Count > 0 ) {
             Vector2 centerOfMass = Vector2.zero;
-            bool amEnemy = (gameObject.tag == "Enemy");
+            if( !amEnemy ) { awarenessRadii = particle.awarenessRadii; }
             foreach ( var n in neighbors.Values ) {
                 Vector2 nPos = n.transform.position;
                 idx++;
-                if( !amEnemy && n.tag == "Enemy" ) {
+                if( !amEnemy && enemies.Contains(n) ) {
                     Vector2 directionToEnemy = pos - nPos;
-                    totalRepellingForce += directionToEnemy.normalized * (avoidForce / Vector2.Distance(pos, n.transform.position));
+                    totalRepellingForce += directionToEnemy.normalized * (avoidForce / Vector2.Distance(pos, nPos));
                 }
                 centerOfMass += nPos;
                 if (idx > 10) { break; }
             }
             centerOfMass /= neighbors.Count;
             toCenter = (centerOfMass - (Vector2)pos).normalized;
+        } else {
+            if( !amEnemy ) { awarenessRadii = particle.awarenessRadii * 5f; }
         }
         try { particle.addVelocity(toCenter + (totalRepellingForce * 10f), 1f); }
         catch { Debug.Log(particle == null); }
@@ -67,6 +70,6 @@ public class AttractImposter : MonoBehaviour
     }
 
     private void OnDrawGizmos() {
-        //Gizmos.DrawWireSphere(pos , awarenessRadii );
+        Gizmos.DrawWireSphere(transform.position , awarenessRadii );
     }
 }
