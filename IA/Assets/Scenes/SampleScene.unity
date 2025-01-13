@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   part: {fileID: 7741045231761141592, guid: 268ac1ec418421a4591806f2c4026db4, type: 3}
-  populationMultiplier: 4
+  populationMultiplier: 3
 --- !u!4 &344823955
 Transform:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 453289557}
   m_Layer: 0
   m_Name: LeftWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 818377449}
   m_Layer: 0
   m_Name: RightWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 1291006957}
   m_Layer: 0
   m_Name: BottomWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 1594313119}
   m_Layer: 0
   m_Name: TopWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -706,6 +706,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2493477088135625926, guid: 268ac1ec418421a4591806f2c4026db4, type: 3}
+      propertyPath: dangerRadii
+      value: 0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493477088135625926, guid: 268ac1ec418421a4591806f2c4026db4, type: 3}
+      propertyPath: awarenessRadii
+      value: 0.95
+      objectReference: {fileID: 0}
     - target: {fileID: 2597444787583171519, guid: 268ac1ec418421a4591806f2c4026db4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.43
@@ -749,10 +757,6 @@ PrefabInstance:
     - target: {fileID: 7741045231761141592, guid: 268ac1ec418421a4591806f2c4026db4, type: 3}
       propertyPath: m_Name
       value: Particle
-      objectReference: {fileID: 0}
-    - target: {fileID: 7741045231761141592, guid: 268ac1ec418421a4591806f2c4026db4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

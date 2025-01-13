@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 766805420209218700}
   - component: {fileID: 6434692036753102310}
   - component: {fileID: 6229818283743488819}
+  - component: {fileID: 4572920990129390318}
+  - component: {fileID: 2493477088135625926}
   m_Layer: 0
   m_Name: Particle
   m_TagString: Untagged
@@ -167,7 +169,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!96 &6434692036753102310
 TrailRenderer:
@@ -292,9 +294,53 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741045231761141592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32cc2b09c274d104dbe9f4a5894e008a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   plant: 0
+  lifeRemaining: 0
+  actionPeriod: 0.1
+  nextAction: 0
+  seedChance: 0.005
+  plantLifeSpan: 50
+  plantInitializationChance: 0.95
+  childChance: 0.0075
+  requiredFoodForChild: 5
+  gardenerRadii: 6
+  speed: 1
+  gardenerLifeSpan: 6
+  foodLifeReplenish: 2
+  foodCount: 0
+--- !u!114 &4572920990129390318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741045231761141592}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ed356f1ecd74b4dab5545b0539acf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awarenessRadii: 3
+  avoidForce: 5
+  maxEnemyNCount: 60
+  maxNCount: 10
+--- !u!114 &2493477088135625926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741045231761141592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c1834879a726194aba4b5f8735efa24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  awarenessRadii: 1.61
+  dangerRadii: 1.38
