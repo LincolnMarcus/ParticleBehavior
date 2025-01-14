@@ -1,5 +1,8 @@
+using System;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
+using Random = UnityEngine.Random;
 
 public class Garden : MonoBehaviour
 {
@@ -26,6 +29,10 @@ public class Garden : MonoBehaviour
     [SerializeField] float foodLifeReplenish = 2f;
 
     public int foodCount = 0;
+
+    bool targetingFood = false;
+    Vector2 targetPosition;
+    GameObject targetPlant;
 
     private void Awake() {
         particle = GetComponent<Particle>();
@@ -65,16 +72,33 @@ public class Garden : MonoBehaviour
                     SpawnNewCopy();
                     foodCount -= requiredFoodForChild;
                 }
+                if (targetPlant == null) {
+                    targetingFood = false;
+                }
             }
         }
 
         if (!plant) {
-            var neighbors = particle.GetNeighborDistances(gardenerRadii, "Plant", 1);
-            if( neighbors.Count > 0 ) {
-                Vector2 plantPosition = neighbors.Values.ToList()[0].transform.position;
-                Vector2 target = (plantPosition - (Vector2)transform.position).normalized;
-                particle.addVelocity(target, speed);
+
+            if (!targetingFood) {
+                var neighbors = particle.GetNeighborDistances(gardenerRadii, "Plant", 1);
+                try {
+                    if (neighbors.Count > 0) {
+                        targetPlant = neighbors.Values.ToList()[Random.Range(0, neighbors.Count - 1)];
+                        targetPosition = targetPlant.transform.position;
+                    } else {
+                        neighbors = particle.GetNeighborDistances(gardenerRadii * 5f, "Plant", 1);
+                        targetPlant = neighbors.Values.ToList()[Random.Range(0, neighbors.Count - 1)];
+                        targetPosition = targetPlant.transform.position;
+                    }
+                } catch (Exception e) { }
+                targetingFood = true;
+            } else {
+                Vector2 target = (targetPosition - (Vector2)transform.position);
+                Debug.DrawLine(transform.position, (Vector2)transform.position + target);
+                particle.addVelocity(target.normalized, speed);
             }
+            
             gameObject.GetComponent<SpriteRenderer>().color =
                 new Color( 0.5882352941f, 0.2941176471f, 0f, lifeRemaining/gardenerLifeSpan );
         } if( plant ) {
@@ -93,8 +117,8 @@ public class Garden : MonoBehaviour
     private void SpawnNewCopy() {
         particle.worldParticles.Clear();
         GameObject copy = Instantiate( gameObject , GameObject.Find( "Manager" ).transform );
-        copy.transform.position = (Vector2)transform.position+new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized * transform.localScale.x;
-
+        copy.transform.position = (Vector2)transform.position + new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized * transform.localScale.x;
+        copy.tag = gameObject.tag;
         Garden gardenCopy = copy.GetComponent<Garden>();
         gardenCopy.lifeRemaining = plant?plantLifeSpan:gardenerLifeSpan;
         gardenCopy.foodCount = 0;
@@ -106,6 +130,13 @@ public class Garden : MonoBehaviour
             Destroy(collision.gameObject);
             lifeRemaining += foodLifeReplenish;
             foodCount++;
+            targetingFood = false;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision) {
+        if (tag == "Plant" && collision.collider.tag == "Plant") {
+            particle.addVelocity((transform.position - collision.transform.position).normalized, 2f);
         }
     }
 }

@@ -21,7 +21,6 @@ public class AttractImposter : MonoBehaviour
 
     bool enemy = false;
 
-    private int frameCount = 0;
     private void Awake()
     {
         particle = GetComponent<Particle>();
@@ -75,6 +74,6 @@ public class AttractImposter : MonoBehaviour
     }
 
     private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(transform.position , awarenessRadii );
+        //Gizmos.DrawWireSphere(transform.position , awarenessRadii );
     }
 }

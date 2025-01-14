@@ -8,6 +8,8 @@ TagManager:
   - Plant
   - Wall
   - Boid
+  - Red
+  - Blue
   layers:
   - Default
   - TransparentFX

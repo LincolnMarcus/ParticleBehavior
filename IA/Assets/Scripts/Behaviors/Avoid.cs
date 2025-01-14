@@ -10,7 +10,7 @@ public class Avoid : MonoBehaviour
     Particle particle;
 
     [SerializeField] float awarenessRadii = 3f;
-    [SerializeField] float boundsAvoidanceFactor = 5f;
+    //[SerializeField] float boundsAvoidanceFactor = 5f;
     void Start()
     {
         particle = GetComponent<Particle>();
@@ -46,6 +46,6 @@ public class Avoid : MonoBehaviour
     }
 
     private void OnDrawGizmos() {
-        Gizmos.DrawWireSphere( transform.position , awarenessRadii );
+        //Gizmos.DrawWireSphere( transform.position , awarenessRadii );
     }
 }

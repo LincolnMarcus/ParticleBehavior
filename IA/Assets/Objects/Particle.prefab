@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 6229818283743488819}
   - component: {fileID: 4572920990129390318}
   - component: {fileID: 2493477088135625926}
+  - component: {fileID: -2127935733802858144}
   m_Layer: 0
   m_Name: Particle
   m_TagString: Untagged
@@ -294,7 +295,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741045231761141592}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32cc2b09c274d104dbe9f4a5894e008a, type: 3}
   m_Name: 
@@ -303,15 +304,15 @@ MonoBehaviour:
   lifeRemaining: 0
   actionPeriod: 0.1
   nextAction: 0
-  seedChance: 0.005
-  plantLifeSpan: 50
-  plantInitializationChance: 0.95
+  seedChance: 0.01
+  plantLifeSpan: 20
+  plantInitializationChance: 0.65
   childChance: 0.0075
   requiredFoodForChild: 5
-  gardenerRadii: 6
+  gardenerRadii: 5
   speed: 1
-  gardenerLifeSpan: 6
-  foodLifeReplenish: 2
+  gardenerLifeSpan: 4
+  foodLifeReplenish: 1
   foodCount: 0
 --- !u!114 &4572920990129390318
 MonoBehaviour:
@@ -336,11 +337,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741045231761141592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c1834879a726194aba4b5f8735efa24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  awarenessRadii: 1.61
-  dangerRadii: 1.38
+  awarenessRadii: 0.95
+  dangerRadii: 0.82
+--- !u!114 &-2127935733802858144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741045231761141592}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f24b252d13dc043869bfb47b051a05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
