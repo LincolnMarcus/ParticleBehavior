@@ -304,15 +304,15 @@ MonoBehaviour:
   lifeRemaining: 0
   actionPeriod: 0.1
   nextAction: 0
-  seedChance: 0.01
-  plantLifeSpan: 20
-  plantInitializationChance: 0.65
-  childChance: 0.0075
-  requiredFoodForChild: 5
+  seedChance: 0.05
+  plantLifeSpan: 10
+  plantInitializationChance: 0.5
+  childChance: 1
+  requiredFoodForChild: 3
   gardenerRadii: 5
   speed: 1
   gardenerLifeSpan: 4
-  foodLifeReplenish: 1
+  foodLifeReplenish: 1.5
   foodCount: 0
 --- !u!114 &4572920990129390318
 MonoBehaviour:
