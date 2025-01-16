@@ -63,7 +63,7 @@ public class Garden : MonoBehaviour
         if( Time.time > nextAction ) { 
             nextAction = Time.time + actionPeriod;
             if( plant ) {
-                if(Random.value < seedChance*5) {
+                if(Random.value < seedChance) {
                     SpawnNewCopy();
                 }
             }
@@ -86,13 +86,11 @@ public class Garden : MonoBehaviour
                     if (neighbors.Count > 0) {
                         targetPlant = neighbors.Values.ToList()[Random.Range(0, neighbors.Count - 1)];
                         targetPosition = targetPlant.transform.position;
+                        targetingFood = true;
                     } else {
-                        neighbors = particle.GetNeighborDistances(gardenerRadii * 5f, "Plant", 1);
-                        targetPlant = neighbors.Values.ToList()[Random.Range(0, neighbors.Count - 1)];
-                        targetPosition = targetPlant.transform.position;
+                        particle.addVelocity(((Vector2)transform.position + targetPosition).normalized, speed);
                     }
-                } catch (Exception e) { }
-                targetingFood = true;
+                } catch ( Exception e ) { }
             } else {
                 Vector2 target = (targetPosition - (Vector2)transform.position);
                 Debug.DrawLine(transform.position, (Vector2)transform.position + target);
@@ -117,7 +115,7 @@ public class Garden : MonoBehaviour
     private void SpawnNewCopy() {
         particle.worldParticles.Clear();
         GameObject copy = Instantiate( gameObject , GameObject.Find( "Manager" ).transform );
-        copy.transform.position = (Vector2)transform.position + new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized * transform.localScale.x;
+        copy.transform.position = (Vector2)transform.position + new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized * (transform.localScale.x*Random.value*5f);
         copy.tag = gameObject.tag;
         Garden gardenCopy = copy.GetComponent<Garden>();
         gardenCopy.lifeRemaining = plant?plantLifeSpan:gardenerLifeSpan;
@@ -138,5 +136,9 @@ public class Garden : MonoBehaviour
         if (tag == "Plant" && collision.collider.tag == "Plant") {
             particle.addVelocity((transform.position - collision.transform.position).normalized, 2f);
         }
+    }
+
+    private void OnBecameInvisible() {
+        Destroy(gameObject);
     }
 }

@@ -11,7 +11,7 @@ public class VisualsMode : MonoBehaviour
     void Update()
     {
         if (tag == "Red")
-            GetComponent<Rigidbody2D>().AddForce(Vector2.right * 4f);
+            GetComponent<Rigidbody2D>().AddForce(Vector2.up * 4f);
         //else
         //    GetComponent<Rigidbody2D>().AddForce(Vector2.right * -4f);
         Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, 3);

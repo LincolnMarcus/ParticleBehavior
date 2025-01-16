@@ -295,7 +295,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741045231761141592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32cc2b09c274d104dbe9f4a5894e008a, type: 3}
   m_Name: 
@@ -304,15 +304,15 @@ MonoBehaviour:
   lifeRemaining: 0
   actionPeriod: 0.1
   nextAction: 0
-  seedChance: 0.05
-  plantLifeSpan: 10
+  seedChance: 0.075
+  plantLifeSpan: 50
   plantInitializationChance: 0.5
   childChance: 1
-  requiredFoodForChild: 3
-  gardenerRadii: 5
-  speed: 1
-  gardenerLifeSpan: 4
-  foodLifeReplenish: 1.5
+  requiredFoodForChild: 1
+  gardenerRadii: 10
+  speed: 0.075
+  gardenerLifeSpan: 10
+  foodLifeReplenish: 1
   foodCount: 0
 --- !u!114 &4572920990129390318
 MonoBehaviour:
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741045231761141592}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33ed356f1ecd74b4dab5545b0539acf4, type: 3}
   m_Name: 
