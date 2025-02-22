@@ -107,7 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd4677248d92d848af9e4cd695ef751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  awarenessRadii: 0
+  awarenessRadii: 2.14
+  maxVelocity: 5
   worldParticles: []
 --- !u!58 &192796577175554411
 CircleCollider2D:
@@ -180,7 +181,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741045231761141592}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -295,7 +296,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741045231761141592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32cc2b09c274d104dbe9f4a5894e008a, type: 3}
   m_Name: 
@@ -337,14 +338,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7741045231761141592}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c1834879a726194aba4b5f8735efa24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  awarenessRadii: 0.95
-  dangerRadii: 0.82
+  speed: 1
+  awarenessRadii: 2.08
+  dangerRadii: 0.87
+  coherenceFactor: 1.26
+  alignFactor: 1
+  separationFactor: 1.22
+  populationPercent: 0.1
 --- !u!114 &-2127935733802858144
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class Particle : MonoBehaviour
 {
     Rigidbody2D rb;
     public float awarenessRadii;
+    public float maxVelocity;
 
     public List<Particle> worldParticles = new List<Particle>();
     private void Awake() {
@@ -72,5 +73,10 @@ public class Particle : MonoBehaviour
         }
 
         return result;
+    }
+
+
+    private void Update() {
+        rb.linearVelocity = Vector2.ClampMagnitude(rb.linearVelocity, maxVelocity );
     }
 }

@@ -31,7 +31,9 @@ public class GameManager : MonoBehaviour
     {
         secondsActive = 0;
         savePath = "Assets/SaveData/" + Enum.GetName(typeof(SaveMode), saveType) + ".json";
-        WriteData(new Dictionary<int, List<int>> { });
+        if (savePopulationsToFile) {
+            WriteData(new Dictionary<int, List<int>> { });
+        }
         for (int y = 0; y < (20 * populationMultiplier) + 1; y++) {
             List<Vector2> row = new List<Vector2>();
             for (int x = 0; x < (20 * populationMultiplier) + 1; x++)
@@ -72,8 +74,9 @@ public class GameManager : MonoBehaviour
         foreach( var g in particles ) {
             g.GetComponent<Particle>().worldParticles = particles;
         }
-
-        InvokeRepeating("SaveGardenTimeline", 0, 1);
+        if (saveType == SaveMode.Garden && savePopulationsToFile) {
+            InvokeRepeating("SaveGardenTimeline", 0, 1);
+        }
     }
 
     public void SaveGardenTimeline() {
