@@ -346,9 +346,9 @@ MonoBehaviour:
   speed: 1
   awarenessRadii: 2.08
   dangerRadii: 0.87
-  coherenceFactor: 1.26
+  coherenceFactor: 1
   alignFactor: 1
-  separationFactor: 1.22
+  separationFactor: 1
   populationPercent: 0.1
 --- !u!114 &-2127935733802858144
 MonoBehaviour:
