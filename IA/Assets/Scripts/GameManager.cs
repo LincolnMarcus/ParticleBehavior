@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public int populationMultiplier = 2;
 
+    [SerializeField] List<GameObject> walls = new List<GameObject>();
+
     List<List<Vector2>> grid = new List<List<Vector2>>();
 
     List<Particle> particles = new List<Particle>();
@@ -20,7 +22,8 @@ public class GameManager : MonoBehaviour
 
     public int secondsActive;
     public enum SaveMode {
-        Garden
+        Garden,
+        Boid
     }
 
     public SaveMode saveType;
@@ -31,6 +34,13 @@ public class GameManager : MonoBehaviour
     {
         secondsActive = 0;
         savePath = "Assets/SaveData/" + Enum.GetName(typeof(SaveMode), saveType) + ".json";
+
+        if (saveType == SaveMode.Boid) {
+            foreach (GameObject wall in walls) {
+                Destroy(wall);
+            }
+        }
+
         if (savePopulationsToFile) {
             WriteData(new Dictionary<int, List<int>> { });
         }

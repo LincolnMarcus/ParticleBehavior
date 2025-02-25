@@ -348,8 +348,9 @@ MonoBehaviour:
   dangerRadii: 0.87
   coherenceFactor: 1
   alignFactor: 1
-  separationFactor: 1
+  separationFactor: 1.41
   populationPercent: 0.1
+  boundAvoidanceFactor: 1
 --- !u!114 &-2127935733802858144
 MonoBehaviour:
   m_ObjectHideFlags: 0

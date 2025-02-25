@@ -51,7 +51,7 @@ public class Particle : MonoBehaviour
         return worldParticles;
     }
 
-    public Dictionary<float, GameObject> GetNeighborDistances( float radius , string tag=null , int max=5 )
+    public Dictionary<float, GameObject> GetNeighborDistances( float radius , List<string> tags=null , int max=5 )
     {
         Vector2 pos = transform.position;
         Dictionary<float , GameObject> result = new Dictionary<float , GameObject>();
@@ -60,7 +60,7 @@ public class Particle : MonoBehaviour
         neighbors.Remove(GetComponent<Collider2D>());
         int idx = 0;
         foreach ( var neighbor in neighbors ) {
-            if ( tag != null && neighbor.tag != tag ) { continue; }
+            if ( tag != null && !tags.Contains(neighbor.tag) ) { continue; }
             float d = Vector2.Distance(pos, neighbor.transform.position );
             try {
                 result.Add( d , neighbor.gameObject );

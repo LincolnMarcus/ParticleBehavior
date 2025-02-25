@@ -150,9 +150,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   part: {fileID: 7741045231761141592, guid: 268ac1ec418421a4591806f2c4026db4, type: 3}
   populationMultiplier: 4
+  walls:
+  - {fileID: 453289556}
+  - {fileID: 818377448}
+  - {fileID: 1594313118}
+  - {fileID: 1291006956}
   savePopulationsToFile: 0
   secondsActive: 0
-  saveType: 0
+  saveType: 1
 --- !u!4 &344823955
 Transform:
   m_ObjectHideFlags: 0

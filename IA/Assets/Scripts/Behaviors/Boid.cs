@@ -17,7 +17,7 @@ public class Boid : MonoBehaviour
     [SerializeField] float alignFactor = 1.0f;
     [SerializeField] float separationFactor = 1.0f;
     [SerializeField] float populationPercent = 0.5f;
-
+    [SerializeField] float boundAvoidanceFactor = 1f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,13 +29,12 @@ public class Boid : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         Vector2 steeringTarget = Vector2.zero;
         Vector2 position = transform.position;
 
         Dictionary<Transform, float> neighborDistancePairs = new Dictionary<Transform, float>();
-        var d = particle.GetNeighborDistances(awarenessRadii, "Boid", 10);
+        var d = particle.GetNeighborDistances(awarenessRadii, new List<string> { "Boid" }, 10);
         foreach (float f in d.Keys) {
             neighborDistancePairs.Add(d[f].transform, f);
         }
@@ -44,7 +43,21 @@ public class Boid : MonoBehaviour
         steeringTarget += Align(d, position) * alignFactor;
         steeringTarget += Separate(neighborDistancePairs , position) * separationFactor;
 
+        steeringTarget += AvoidBounds()*boundAvoidanceFactor;
+
         particle.addVelocity(steeringTarget, speed);
+    }
+
+    private Vector2 AvoidBounds() {
+        Vector2 res = Vector2.zero;
+        if( Mathf.Abs(transform.position.x) > 10 ) {
+            res.x = (Mathf.Abs(transform.position.x)-10)*( transform.position.x < 0 ? 1 : -1);
+        }
+        if (Mathf.Abs(transform.position.y) > 10) {
+            res.y = (Mathf.Abs(transform.position.y) - 10)*(transform.position.y < 0 ? 1 : -1);
+        }
+
+        return res;
     }
 
     private Vector2 Cohere( Dictionary<Transform, float> neighborDistancePairs , Vector2 position) {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
@@ -81,7 +82,7 @@ public class Garden : MonoBehaviour
         if (!plant) {
 
             if (!targetingFood) {
-                var neighbors = particle.GetNeighborDistances(gardenerRadii, "Plant", 1);
+                var neighbors = particle.GetNeighborDistances(gardenerRadii, new List<string> { "Plant" }, 1);
                 try {
                     if (neighbors.Count > 0) {
                         targetPlant = neighbors.Values.ToList()[Random.Range(0, neighbors.Count - 1)];
@@ -139,6 +140,8 @@ public class Garden : MonoBehaviour
     }
 
     private void OnBecameInvisible() {
-        Destroy(gameObject);
+        if (this.isActiveAndEnabled) {
+            Destroy(gameObject);
+        }
     }
 }
